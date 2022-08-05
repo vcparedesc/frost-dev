@@ -3,10 +3,10 @@
  * <* DateString[] <> " " <> DateString["TimeZoneName"]  *>
  */
 
-#ifdef MATLAB_MEX_FILE
 #include <stdexcept>
 #include <cmath>
 #include<math.h>
+
 /**
  * Copied from Wolfram Mathematica C Definitions file mdefs.hpp
  * Changed marcos to inline functions (Eric Cousineau)
@@ -41,7 +41,8 @@ const double Degree = 0.01745329251994329576924;
 inline double Sec(double x) { return 1/cos(x); }
 inline double Csc(double x) { return 1/sin(x); }
 
-#endif
+
+
 
 /*
  * Sub functions

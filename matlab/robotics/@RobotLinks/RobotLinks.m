@@ -104,6 +104,12 @@ classdef RobotLinks < ContinuousDynamics
                     % load model from the URDF file
                     [name, links, joints, ~] = load_urdf(config_file,options.RoundNumber);
                     
+                    for i = 1:length(joints)
+                       if( isempty( joints(i).Axis ) )
+                           joints(i).Axis = [0 0 1];
+                       end
+                    end                    
+                    
                 else
                     error('Invalid configuration file type detected: %s.\n',file_ext(2:end));
                 end
@@ -122,6 +128,12 @@ classdef RobotLinks < ContinuousDynamics
                     'The joints structure must have the following fields:\n %s',implode(fields,', '));
                 joints = config.joints;
                 
+                for i = 1:length(joints)
+                   if( isempty( joints(i).Axis ) )
+                       joints(i).Axis = [0 0 1];
+                   end
+                end
+                
                 %                 if isfield(config,'transmissions')
                 %                     fields = {'Joint','MechanicalReduction'};
                 %                     assert(all(isfield(config.transmissions,fields)),...
@@ -134,12 +146,12 @@ classdef RobotLinks < ContinuousDynamics
             
             % remove links with zero mass and inertia
             link_indices_to_remove = [];
-            for joint_index=1:numel(links)
-                link = links(joint_index);
-                if link.Mass == 0 && all(all(link.Inertia == zeros(3)))
-                    link_indices_to_remove = [link_indices_to_remove,joint_index]; %#ok<*AGROW>
-                end
-            end
+%             for joint_index=1:numel(links)
+%                 link = links(joint_index);
+%                 if link.Mass == 0 && all(all(link.Inertia == zeros(3)))
+%                     link_indices_to_remove = [link_indices_to_remove,joint_index]; %#ok<*AGROW>
+%                 end
+%             end
             if ~isempty(link_indices_to_remove)
                 links(link_indices_to_remove) = [];
             end

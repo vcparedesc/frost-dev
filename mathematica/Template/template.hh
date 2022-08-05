@@ -12,7 +12,6 @@
 
 
 #include "math2mat.hpp"
-#include "mdefs.hpp"
 
 namespace <*TemplateSlot["namespace"]*>
 {
